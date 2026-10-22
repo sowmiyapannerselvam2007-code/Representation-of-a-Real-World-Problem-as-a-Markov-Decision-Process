@@ -1,185 +1,194 @@
-# Representation-of-a-Real-World-Problem-as-a-Markov-Decision-Process
-
+# Representation of a Real-World Problem as a Markov Decision Process
 
 ## Aim
 
-Write your aim here.
-
-Example:
-
-> To identify a real-world sequential decision-making problem and represent it formally as a Markov Decision Process by defining its states, actions, rewards, transitions, and Python representation.
-
----
+To represent a real-world sequential decision-making problem as a Markov Decision Process (MDP) by defining its states, actions, transition probabilities, rewards, and Python representation.
 
 ## Problem Statement
 
 ### Problem Description
 
-Write your answer here.
+**Application: Traffic Signal Control**
 
-Describe the real-world application that you selected.
+A traffic signal controls vehicles at a road junction. The signal changes between red and green based on traffic conditions. The objective is to reduce traffic congestion and ensure smooth traffic flow.
 
-
----
+The traffic signal acts as an agent, the road junction is the environment, and the traffic conditions determine the states. The agent selects actions and receives rewards based on traffic flow.
 
 ## MDP Components
 
 A Markov Decision Process is represented as:
 
-$$
-MDP = (S, A, P, R, \gamma)
-$$
+\[
+MDP=(S,A,P,R,\gamma)
+\]
 
 Where:
 
 | Symbol | Meaning |
 |---|---|
-| $S$ | Set of states |
-| $A$ | Set of actions |
-| $P$ | Transition probability function |
-| $R$ | Reward function |
-| $\gamma$ | Discount factor |
-
----
+| S | Set of states |
+| A | Set of actions |
+| P | Transition probability function |
+| R | Reward function |
+| γ | Discount factor |
 
 ## State Space
 
-Write your answer here.
-
-The state space should list all possible situations in which the agent can exist.
-
-Example format:
+The state space represents the traffic conditions at the junction.
 
 ```text
 S = {
-    State 1,
-    State 2,
-    State 3,
-    ...
+    Low Traffic,
+    Medium Traffic,
+    High Traffic
 }
 ```
-
-
-
----
 
 ## Sample State
 
-Write your answer here.
-
-A sample state is one specific example from the state space.
-
-
-
----
+**High Traffic:** A large number of vehicles are waiting at the junction, causing congestion.
 
 ## Action Space
 
-Write your answer here.
-
-The action space should list all possible actions available to the agent.
-
-Example format:
+The action space represents the possible actions taken by the traffic signal.
 
 ```text
 A = {
-    Action 1,
-    Action 2,
-    Action 3,
-    ...
+    Red Signal,
+    Green Signal
 }
 ```
 
-
----
-
 ## Sample Action
 
-Write your answer here.
-
-A sample action is one action selected from the action space.
-
-
-
----
+**Green Signal:** The signal allows vehicles to move through the junction, helping to reduce congestion.
 
 ## Transition Probability
 
-Write your answer here.
-
-The transition probability explains how the environment moves from one state to another after an action is taken.
+Transition probability represents the probability of moving from one traffic state to another after an action is taken.
 
 General form:
 
-$$
-P(s' \mid s,a)
-$$
+\[
+P(s'|s,a)
+\]
 
-This means:
+Example:
 
-> Probability of reaching next state $s'$ after taking action $a$ in current state $s$.
+If the current state is High Traffic and the action is Green Signal, the probability of moving to Medium Traffic may be 0.7.
 
+\[
+P(\text{Medium Traffic}|\text{High Traffic},\text{Green})=0.7
+\]
 
----
+This means there is a 70% probability that traffic changes from high to medium after the green signal. This is an illustrative probability.
 
 ## Reward Function
 
-Write your answer here.
+The reward function provides feedback based on traffic conditions.
 
-The reward function defines the feedback received by the agent after taking an action.
-
-General form:
-
-$$
+\[
 R(s,a,s')
-$$
+\]
 
+Example:
 
+- +10 for reducing traffic congestion.
+- +5 for maintaining smooth traffic flow.
+- -10 for increased traffic congestion.
 
----
+The objective is to maximize the total reward and reduce traffic congestion.
 
 ## Graphical Representation
 
-Write your answer here.
+```text
+       Green Signal
+  ┌────────────────────┐
+  │                    ▼
+Low Traffic ──────► Medium Traffic
+     ▲                    │
+     │                    │ Green Signal
+     │                    ▼
+     └──────────── High Traffic
+                (Congestion)
+```
 
-Draw the MDP graph.
-
-The graph should include:
-
-1. States as nodes.
-2. Actions as arrows.
-3. Rewards on transitions.
-4. Transition probabilities if applicable.
-
-
----
+The states represent traffic conditions, and the arrows represent possible transitions after actions. Rewards are assigned according to changes in traffic conditions.
 
 ## Python Representation
 
-Write your code here.
-
-Use Python dictionaries to represent the MDP.
-
-
 ```python
 # MDP Representation using Python
-# print("Name:       ")
-# print("Register Number:     ")
 
+print("Name: __________________")
+print("Register Number: __________________")
+
+states = {
+    0: "Low Traffic",
+    1: "Medium Traffic",
+    2: "High Traffic"
+}
+
+actions = {
+    0: "Red Signal",
+    1: "Green Signal"
+}
+
+# Illustrative transition probabilities
+transitions = {
+    ("High Traffic", "Green Signal"): {
+        "Medium Traffic": 0.7,
+        "High Traffic": 0.3
+    },
+    ("Medium Traffic", "Green Signal"): {
+        "Low Traffic": 0.6,
+        "Medium Traffic": 0.4
+    },
+    ("Low Traffic", "Red Signal"): {
+        "Medium Traffic": 0.4,
+        "Low Traffic": 0.6
+    }
+}
+
+# Reward function
+rewards = {
+    "Low Traffic": 10,
+    "Medium Traffic": 5,
+    "High Traffic": -10
+}
+
+gamma = 0.9
+
+print("\nStates:", states)
+print("Actions:", actions)
+print("Transition Probabilities:", transitions)
+print("Rewards:", rewards)
+print("Discount Factor:", gamma)
 ```
----
+
 ## Output
 
-Write your Python output here.
+```text
+Name: __________________
+Register Number: __________________
 
+States: {0: 'Low Traffic', 1: 'Medium Traffic', 2: 'High Traffic'}
 
----
+Actions: {0: 'Red Signal', 1: 'Green Signal'}
+
+Transition Probabilities:
+{('High Traffic', 'Green Signal'):
+ {'Medium Traffic': 0.7, 'High Traffic': 0.3},
+ ('Medium Traffic', 'Green Signal'):
+ {'Low Traffic': 0.6, 'Medium Traffic': 0.4},
+ ('Low Traffic', 'Red Signal'):
+ {'Medium Traffic': 0.4, 'Low Traffic': 0.6}}
+
+Rewards: {'Low Traffic': 10, 'Medium Traffic': 5, 'High Traffic': -10}
+
+Discount Factor: 0.9
+```
 
 ## Result
 
-Write your result here.
-
-
-
----
-
+The real-world problem of traffic signal control was successfully represented as a Markov Decision Process by defining the state space, action space, transition probabilities, reward function, and Python representation.
