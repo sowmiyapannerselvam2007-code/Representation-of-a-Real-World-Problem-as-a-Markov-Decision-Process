@@ -120,8 +120,8 @@ The states represent traffic conditions, and the arrows represent possible trans
 ```python
 # MDP Representation using Python
 
-print("Name: __________________")
-print("Register Number: __________________")
+print("Name: p sowmiya")
+print("Register Number: 212225240152")
 
 states = {
     0: "Low Traffic",
