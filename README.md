@@ -169,8 +169,8 @@ print("Discount Factor:", gamma)
 ## Output
 
 ```text
-Name: __________________
-Register Number: __________________
+Name: sowmiya p
+Register Number: 212225240152
 
 States: {0: 'Low Traffic', 1: 'Medium Traffic', 2: 'High Traffic'}
 
